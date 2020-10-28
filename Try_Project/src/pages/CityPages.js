@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, FlatList } from "react-native";
-import { CityItem } from "../components"
+import { CityItem, Buttons } from "../components"
 
+let originalList = []
 
 const CityPages = (props) => {
     const [cityDaten, setCityDaten] = useState([])
@@ -11,6 +12,7 @@ const CityPages = (props) => {
         const { data } = await axios.get("https://opentable.herokuapp.com/api/cities")
         // console.log(data)
         setCityDaten(data.cities)
+        originalList = [data.cities]
     }
     useEffect(() => {
         fetchDaten()
@@ -26,10 +28,24 @@ const CityPages = (props) => {
         )
     }
 
+    const searchCity = (search) => {
+        const filteredCity = originalList.filter(city => {
+            const addedCity = search.toUpperCase();
+            const addedValue = city.toUpperCase();
+            return addedValue.indexOf(addedCity) > -1
+
+        })
+        setCityDaten(filteredCity)
+    }
+
     return (
         <SafeAreaView>
+            <Buttons
+                placeholder="Search a  City..."
+                onSelect={(value) => searchCity(value)}
+            />
             <FlatList
-                keyExtractor={(_,index)=>index.toString()}
+                keyExtractor={(_, index) => index.toString()}
                 data={cityDaten}
                 renderItem={RenderItem}
             />

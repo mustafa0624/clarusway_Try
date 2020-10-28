@@ -14,7 +14,7 @@ function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="CityPages" component={CityPages} />
+        <Stack.Screen name="CityPages" component={CityPages} options={{headerShown:false}} />
         <Stack.Screen name="RestaurantPages" component={RestaurantPages} />
       </Stack.Navigator>
     </NavigationContainer>
