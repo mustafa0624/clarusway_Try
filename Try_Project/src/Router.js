@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import {CityPages} from "./pages"
 
 
 
@@ -13,7 +14,8 @@ function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+        <Stack.Screen name="CityPages" component={CityPages} />
+        <Stack.Screen name="RestaurantPages" component={RestaurantPages} />
       </Stack.Navigator>
     </NavigationContainer>
   );
