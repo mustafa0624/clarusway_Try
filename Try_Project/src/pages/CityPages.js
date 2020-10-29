@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, Text, FlatList } from "react-native";
+import { SafeAreaView, Text, FlatList,ActivityIndicator } from "react-native";
 import { CityItem, Buttons } from "../components"
 
 // let originalList = []
@@ -8,12 +8,15 @@ import { CityItem, Buttons } from "../components"
 const CityPages = (props) => {
     const [cityDaten, setCityDaten] = useState([])
     const [newData,setNewData] =useState([])
+    const [isLoading,setIsLoading] =useState(false)
 
     const fetchDaten = async () => {
+        setIsLoading(true)
         const { data } = await axios.get("https://opentable.herokuapp.com/api/cities")
         // console.log(data)
         setCityDaten(data.cities)
         setNewData(data.cities)
+        setIsLoading(false)
     }
     useEffect(() => {
         fetchDaten()
@@ -21,6 +24,7 @@ const CityPages = (props) => {
 
     const RenderItem = ({ item }) => {
         return (
+           
             <CityItem
                 value={item}
                 onSelect={() => props.navigation.navigate("RestaurantPages", { selectedCity: item })}
@@ -45,11 +49,17 @@ const CityPages = (props) => {
                 placeholder="Search a  City..."
                 onSelect={(value) => searchCity(value)}
             />
-            <FlatList
+            {
+
+                isLoading ? <ActivityIndicator/> :
+          
+                <FlatList
                 keyExtractor={(_, index) => index.toString()}
                 data={cityDaten}
                 renderItem={RenderItem}
-            />
+                />
+            } 
+           
 
         </SafeAreaView>
     )
