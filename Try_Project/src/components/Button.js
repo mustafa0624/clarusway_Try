@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Dimensions, SafeAreaView, StyleSheet, Text } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import React from "react";
+import { Dimensions, SafeAreaView, StyleSheet,TextInput } from "react-native";
+
 
 
 const Buttons = (props)=>{

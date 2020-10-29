@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, Text, FlatList } from "react-native";
 import { CityItem, Buttons } from "../components"
 
-let originalList = []
+// let originalList = []
 
 const CityPages = (props) => {
     const [cityDaten, setCityDaten] = useState([])
+    const [newData,setNewData] =useState([])
 
     const fetchDaten = async () => {
         const { data } = await axios.get("https://opentable.herokuapp.com/api/cities")
         // console.log(data)
         setCityDaten(data.cities)
-        originalList = [data.cities]
+        setNewData(data.cities)
     }
     useEffect(() => {
         fetchDaten()
@@ -29,7 +30,7 @@ const CityPages = (props) => {
     }
 
     const searchCity = (search) => {
-        const filteredCity = originalList.filter(city => {
+        const filteredCity = newData.filter(city => {
             const addedCity = search.toUpperCase();
             const addedValue = city.toUpperCase();
             return addedValue.indexOf(addedCity) > -1
