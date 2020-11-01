@@ -1,5 +1,6 @@
-const initialState ={
-    counter:0
+const initialState={
+    counter:0,
+    Name:"Mustafa"
 };
 
-export {initialState};
+export default initialState

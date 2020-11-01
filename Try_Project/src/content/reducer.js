@@ -1,14 +1,19 @@
 function reducer(state, action) {
     switch (action.type) {
-        case "ARTTIR":
+        case "Arttir":
             state.counter = state.counter + 1
-            return { ...state }
-        case "AZALT":
-            state.counter = state.counter - 1
+            return { ...state };
+
+        case "Azalt":
+            state.counter = state.counter - 1;
+            return{...state};
+
+        case "isimDegistir":
+            state.Name = action.payload.myNewName    
 
         default:
-            return state;
+            return state    
     }
 }
 
-export {reducer}
+export default reducer
